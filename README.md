@@ -1,4 +1,4 @@
-# sos_deslizamentos_app
+# SOS Deslizamentos APP
 
 A new Flutter application.
 
