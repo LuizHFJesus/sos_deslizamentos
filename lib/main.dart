@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sos_deslizamentos_app/screens/homeLogin_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,8 +11,9 @@ class MyApp extends StatelessWidget {
       title: 'SOS Deslizamentos',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        primaryColor: Colors.lightBlue[400],
       ),
-      home: Container(),
+      home: HomeLoginScreen(),
     );
   }
 }
