@@ -12,7 +12,7 @@ class HomeLoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return PageView(
       controller: _pageController,
-      children: <Widget>[LoginTab(), HomeLoginTab(_pageController), SignUpTab()],
+      children: <Widget>[SignUpTab(), HomeLoginTab(_pageController), LoginTab()],
     );
   }
 }
