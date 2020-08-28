@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sos_deslizamentos_app/widgets/round_button.dart';
 
 class HomeLoginTab extends StatelessWidget {
 
@@ -22,7 +23,7 @@ class HomeLoginTab extends StatelessWidget {
     _pageController.animateToPage(
       0,
       duration: Duration(milliseconds: 800),
-      curve: Curves.bounceOut,
+      curve: Curves.ease,
     );
   }
 
@@ -30,54 +31,40 @@ class HomeLoginTab extends StatelessWidget {
     _pageController.animateToPage(
       2,
       duration: Duration(milliseconds: 800),
-      curve: Curves.bounceOut,
-    );
-  }
-
-  goToHomeLoginTab(){
-    _pageController.animateToPage(
-      1,
-      duration: Duration(milliseconds: 800),
-      curve: Curves.bounceOut,
+      curve: Curves.ease,
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      fit: StackFit.expand,
-      children: <Widget>[
-        _buildBody(),
-        SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30.0),
+    return Scaffold(
+      body: Stack(
+        children: <Widget>[
+          _buildBody(),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(top: 100.0),
-                  child: Center(
-                    child:  Image.asset(
-                      "assets/images/logo.png",
-                      height: 150.0,
-                      width: 150.0,
-                    ),
-                  ),
+                Image.asset(
+                  "assets/images/logo.png",
+                  height: 150.0,
+                  width: 150.0,
                 ),
                 Container(
                   padding: EdgeInsets.only(top: 20.0),
                   child: Text(
                     "SOS Deslizamentos",
                     style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 25.0,
-                        fontWeight: FontWeight.w300
+                      color: Colors.white,
+                      fontSize: 25.0,
+                      fontWeight: FontWeight.w300
                     ),
                   ),
                 ),
+
                 Container(  // SignUp Button
-                  width: MediaQuery.of(context).size.width,
                   margin: EdgeInsets.only(top: 100.0),
-                  alignment: Alignment.center,
                   child: Row(
                     children: <Widget>[
                       Expanded(
@@ -90,77 +77,48 @@ class HomeLoginTab extends StatelessWidget {
                           highlightedBorderColor: Colors.white,
                           onPressed: () => goToSignUpTab(),
                           child: Container(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 20.0,
-                                  horizontal: 20.0
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Expanded(
-                                    child: Text(
-                                      "CRIAR CONTA",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          letterSpacing: 0.3
-                                      ),
+                            padding: EdgeInsets.symmetric(
+                              vertical: 20.0,
+                              horizontal: 20.0
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Expanded(
+                                  child: Text(
+                                    "CRIAR CONTA",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 0.3
                                     ),
-                                  )
-                                ],
-                              )
+                                  ),
+                                )
+                              ],
+                            )
                           ),
                         ),
                       )
                     ],
                   ),
                 ),
-                Container(  //Button Login
-                  width: MediaQuery.of(context).size.width,
+
+                Container( // button login
                   margin: EdgeInsets.only(top: 20.0),
-                  alignment: Alignment.center,
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: FlatButton(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
-                          color: Colors.white,
-                          onPressed: () => goToLoginTab(),
-                          child: Container(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 20.0,
-                                  horizontal: 20.0
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Expanded(
-                                    child: Text(
-                                      "LOGIN",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          color: Colors.lightBlue[300],
-                                          fontWeight: FontWeight.bold,
-                                          letterSpacing: 0.3
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              )
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
+                  child: RoundButton(
+                    buttonText: "Login",
+                    backgroundColor: Colors.white,
+                    textColor: Theme.of(context).primaryColor,
+                    functionOnPressed: ()=>goToLoginTab()
+                  )
                 ),
+
               ],
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
