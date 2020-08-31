@@ -11,17 +11,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScopedModel<UserModel>(
-      model: UserModel(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'SOS Deslizamentos',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          primaryColor: Colors.lightBlue[500],
-        ),
-        home: HomeLoginScreen(),
-      )
+        model: UserModel(),
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'SOS Deslizamentos',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+            primaryColor: Colors.lightBlue[500],
+          ),
+          home: HomeLoginScreen(),
+        )
     );
   }
 }
-
