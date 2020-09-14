@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:sos_deslizamentos_app/models/user_model.dart';
-import 'package:sos_deslizamentos_app/screens/success-screen.dart';
+import 'package:sos_deslizamentos_app/screens/success_screen.dart';
 import 'package:sos_deslizamentos_app/widgets/custom_textFormField.dart';
 import 'package:sos_deslizamentos_app/widgets/round_button.dart';
 
@@ -23,7 +23,8 @@ class _RecoverPasswordScreenState extends State<RecoverPasswordScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        title: Text("Recuperar Senha"),
+        title: Text("Recuperar Senha", style: TextStyle(fontWeight: FontWeight.bold),),
+        centerTitle: true,
       ),
       body: ScopedModelDescendant<UserModel>(
         builder: (context, child, model){
@@ -40,22 +41,25 @@ class _RecoverPasswordScreenState extends State<RecoverPasswordScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
+
                       SizedBox(height: 16.0),
                       Text(
                         "Esqueceu a sua Senha?",
-                        style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
+                        style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,
                       ),
                       Text(
-                        "Preencha abaixo o seu e-mail para redefinir a senha.",
+                        "Por favor, informe o e-mail associado a sua conta que enviaremos um link com as instruções para a restauração da sua senha.",
                         textAlign: TextAlign.center,
                       ),
                       SizedBox(height: 40.0),
+
                       CustomTextFormField(
                         title: "E-mail",
                         controller: _emailController,
                         obscureText: false,
                         hintText: "seuemail@endereço",
+                        prefixIcon: Icon(Icons.email),
                         suffixIcon: null,
                         inputType: TextInputType.emailAddress,
                         validator: RequiredValidator(errorText: "O e-mail é obrigatório!")

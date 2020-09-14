@@ -1,28 +1,29 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-//import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:sos_deslizamentos_app/models/user_model.dart';
-import 'package:sos_deslizamentos_app/screens/fail-screen.dart';
-import 'package:sos_deslizamentos_app/screens/recoverPassword-screen.dart';
-import 'package:sos_deslizamentos_app/screens/success-screen.dart';
+import 'package:sos_deslizamentos_app/screens/fail_screen.dart';
+import 'package:sos_deslizamentos_app/screens/recoverPassword_screen.dart';
+import 'package:sos_deslizamentos_app/screens/success_screen.dart';
 import 'package:sos_deslizamentos_app/widgets/custom_textFormField.dart';
 import 'package:sos_deslizamentos_app/widgets/icon_round_button.dart';
 import 'package:sos_deslizamentos_app/widgets/round_button.dart';
 
-class LoginTab extends StatefulWidget {
+class LoginScreen extends StatefulWidget {
   @override
-  _LoginTabState createState() => _LoginTabState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _LoginTabState extends State<LoginTab> {
+class _LoginScreenState extends State<LoginScreen> {
 
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  bool _rememberMe = false;
 
   bool _isObscure = true;
   void _toggleVisibility(){
@@ -39,12 +40,8 @@ class _LoginTabState extends State<LoginTab> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        leading: IconButton(
-          icon: Icon(Icons.keyboard_arrow_left),
-          color: Theme.of(context).primaryColor,
-          iconSize: 30.0,
-          onPressed: (){}
-        ),
+        title: Text("Realizar Login", style: TextStyle(fontWeight: FontWeight.bold),),
+        centerTitle: true,
       ),
 
       body: ScopedModelDescendant<UserModel>(
@@ -62,22 +59,12 @@ class _LoginTabState extends State<LoginTab> {
                   child: Column(
                     children: <Widget>[
 
-//                      Padding(
-//                        padding: EdgeInsets.symmetric(vertical: 40.0),
-//                        child: Center(
-//                          child:  Image.asset(
-//                            "assets/images/logo.png",
-//                            height: 120.0,
-//                            width: 120.0,
-//                          ),
-//                        ),
-//                      ),
-
                       CustomTextFormField(
                         title: "E-mail",
                         controller: _emailController,
                         obscureText: false,
                         hintText: "seuemail@endereço",
+                          prefixIcon: Icon(Icons.email),
                         suffixIcon: null,
                         inputType: TextInputType.emailAddress,
                         validator: RequiredValidator(errorText: "O e-mail é obrigatório!")
@@ -89,6 +76,7 @@ class _LoginTabState extends State<LoginTab> {
                         controller: _passwordController,
                         obscureText: _isObscure,
                         hintText: "********",
+                        prefixIcon: Icon(Icons.vpn_key),
                         suffixIcon: IconButton(
                           onPressed: _toggleVisibility,
                           icon: _isObscure ? Icon(Icons.visibility_off) : Icon(Icons.visibility),
@@ -108,7 +96,7 @@ class _LoginTabState extends State<LoginTab> {
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Theme.of(context).primaryColor,
-                                fontSize: 15.0,
+                                fontSize: 16.0,
                               ),
                             ),
                             onPressed: (){
@@ -121,22 +109,45 @@ class _LoginTabState extends State<LoginTab> {
                         ],
                       ),
 
+                      Row(
+                        children: <Widget>[
+
+                          Checkbox(
+                            value: _rememberMe,
+                            //activeColor: Theme.of(context).primaryColor,
+                            onChanged:(bool value) {
+                              setState(() {
+                                _rememberMe = value;
+                              });
+                            }
+                          ),
+
+                          Text(
+                            "Lembrar meu cadastro",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).primaryColor,
+                              fontSize: 16.0,
+                            ),
+                          )
+                        ],
+                      ),
+
                       Container( // button login
-                        margin: EdgeInsets.only(top: 6.0),
+                        margin: EdgeInsets.only(top: 8.0),
                         child: RoundButton(
                           buttonText: "Entrar",
                           backgroundColor: Theme.of(context).primaryColor,
                           textColor: Colors.white,
                           functionOnPressed: (){
                             if(_formKey.currentState.validate()){
-
+                              model.signInWithEmail(
+                                email: _emailController.text,
+                                password: _passwordController.text,
+                                onSuccess: _onSuccess,
+                                onFail: _onFail
+                              );
                             }
-                            model.signIn(
-                              email: _emailController.text,
-                              password: _passwordController.text,
-                              onSuccess: _onSuccess,
-                              onFail: _onFail
-                            );
                           }
                         ),
                       ),
@@ -191,7 +202,12 @@ class _LoginTabState extends State<LoginTab> {
                               buttonTextColor: Colors.white,
                               iconColor: Colors.white,
                               icon: null,
-                              functionOnPressed: ()=>null
+                              functionOnPressed: (){
+                                model.signInWithGoogle(
+                                  onSuccess: _onSuccess,
+                                  onFail: _onFail
+                                );
+                              }
                             ),
                           ],
                         ),

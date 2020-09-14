@@ -2,18 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:sos_deslizamentos_app/models/user_model.dart';
-import 'package:sos_deslizamentos_app/screens/fail-screen.dart';
-import 'package:sos_deslizamentos_app/screens/success-screen.dart';
+import 'package:sos_deslizamentos_app/screens/fail_screen.dart';
+import 'package:sos_deslizamentos_app/screens/formaddress_screen.dart';
+import 'package:sos_deslizamentos_app/screens/success_screen.dart';
 import 'package:sos_deslizamentos_app/widgets/custom_textFormField.dart';
 import 'package:sos_deslizamentos_app/widgets/icon_round_button.dart';
 import 'package:sos_deslizamentos_app/widgets/round_button.dart';
 
-class SignUpTab extends StatefulWidget {
+class SignUpScreen extends StatefulWidget {
   @override
-  _SignUpTabState createState() => _SignUpTabState();
+  _SignUpScreen createState() => _SignUpScreen();
 }
 
-class _SignUpTabState extends State<SignUpTab> {
+class _SignUpScreen extends State<SignUpScreen> {
 
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
@@ -36,15 +37,8 @@ class _SignUpTabState extends State<SignUpTab> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.keyboard_arrow_right),
-            color: Theme.of(context).primaryColor,
-            iconSize: 30.0,
-            onPressed: (){}
-          ),
-        ],
+        title: Text("Criar Conta", style: TextStyle(fontWeight: FontWeight.bold),),
+        centerTitle: true,
       ),
 
       body: ScopedModelDescendant<UserModel>(
@@ -64,20 +58,12 @@ class _SignUpTabState extends State<SignUpTab> {
                   child: Column(
                     children: <Widget>[
 
-//                      Padding(
-//                        padding: EdgeInsets.symmetric(vertical: 40.0),
-//                        child: Image.asset(
-//                          "assets/images/logo.png",
-//                          height: 120.0,
-//                          width: 120.0,
-//                        ),
-//                      ),
-
                       CustomTextFormField(
                         title: "Nome Completo",
                         controller: _nameController,
                         obscureText: false,
                         hintText: "José Antônio da Silva",
+                        prefixIcon: Icon(Icons.person),
                         suffixIcon: null,
                         inputType: TextInputType.text,
                         validator: RequiredValidator(errorText: "O nome é obrigatório!")
@@ -89,6 +75,7 @@ class _SignUpTabState extends State<SignUpTab> {
                         controller: _emailController,
                         obscureText: false,
                         hintText: "seuemail@endereço",
+                        prefixIcon: Icon(Icons.email),
                         suffixIcon: null,
                         inputType: TextInputType.emailAddress,
                         validator: emailValidator
@@ -100,6 +87,7 @@ class _SignUpTabState extends State<SignUpTab> {
                         controller: _passwordController,
                         obscureText: _isObscure,
                         hintText: "*********",
+                        prefixIcon: Icon(Icons.vpn_key),
                         suffixIcon: IconButton(
                           onPressed: _toggleVisibility,
                           icon: _isObscure ? Icon(Icons.visibility_off) : Icon(Icons.visibility),
@@ -125,7 +113,7 @@ class _SignUpTabState extends State<SignUpTab> {
                                 "name": _nameController.text,
                               };
 
-                              model.signUp(
+                              model.signUpWithEmail(
                                 userData: userData,
                                 password: _passwordController.text,
                                 onSuccess: _onSuccess,
@@ -191,6 +179,7 @@ class _SignUpTabState extends State<SignUpTab> {
                           ],
                         ),
                       )
+
                     ]
                   ),
                 ),
@@ -220,7 +209,7 @@ class _SignUpTabState extends State<SignUpTab> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => SuccessScreen(text: "Conta criada com sucesso!",)
+        builder: (context) => FormAddressScreen()
       )
     );
   }
