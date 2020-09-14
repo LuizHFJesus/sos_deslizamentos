@@ -7,6 +7,7 @@ class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final bool obscureText;
   final String hintText;
+  final Icon prefixIcon;
   final IconButton suffixIcon;
   final TextInputType inputType;
   final Function validator;
@@ -17,6 +18,7 @@ class CustomTextFormField extends StatelessWidget {
     @required this.controller,
     @required this.obscureText,
     @required this.hintText,
+    @required this.prefixIcon,
     @required this.suffixIcon,
     @required this.inputType,
     @required this.validator
@@ -30,7 +32,7 @@ class CustomTextFormField extends StatelessWidget {
         Container(
           width: MediaQuery.of(context).size.width,
           child: Text(
-            title.toUpperCase(),
+            title,
             textAlign: TextAlign.start,
             style: TextStyle(
                 fontWeight: FontWeight.bold,
@@ -52,6 +54,7 @@ class CustomTextFormField extends StatelessWidget {
                   decoration: InputDecoration(
                     hintText: hintText,
                     hintStyle: TextStyle(color: Colors.grey),
+                    prefixIcon: prefixIcon,
                     suffixIcon: suffixIcon,
                   ),
                   keyboardType: inputType,

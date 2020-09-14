@@ -1,19 +1,28 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:flutter/material.dart';
 
 class UserModel extends Model{
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   FirebaseUser firebaseUser;
   Map<String, dynamic> userData = Map();
 
   bool isLoading = false;
+  void isLoadingTrue(){
+    isLoading = true;
+    notifyListeners();
+  }
+  void isLoadingFalse(){
+    isLoading = false;
+    notifyListeners();
+  }
 
   static UserModel of(BuildContext context) =>
       ScopedModel.of<UserModel>(context);
-
 
   @override
   void addListener(VoidCallback listener) {
@@ -22,50 +31,75 @@ class UserModel extends Model{
     _loadCurrentUser();
   }
 
-  void signUp({@required Map<String, dynamic> userData, @required String password,
-    @required VoidCallback onSuccess, @required VoidCallback onFail}) {
-    isLoading = true;
-    notifyListeners();
+  void signUpWithEmail({@required Map<String, dynamic> userData, @required String password,
+    @required VoidCallback onSuccess, @required VoidCallback onFail}) async {
 
-    _auth.createUserWithEmailAndPassword(
-        email: userData["email"],
-        password: password
-    ).then((user) async{
-      firebaseUser = user;
+    isLoadingTrue();
+
+    try{
+      firebaseUser = (await _auth.createUserWithEmailAndPassword(
+          email: userData['email'], password: password)).user;
 
       await _saveUserData(userData);
 
       onSuccess();
-      isLoading = false;
-      notifyListeners();
-    }).catchError((e) {
-      print(e);
+      isLoadingFalse();
+    } catch (error) {
+      print("Teste Erro: $error");
       onFail();
-      isLoading = false;
-      notifyListeners();
-    });
+      isLoadingFalse();
+    }
   }
 
-  void signIn({@required String email, @required String password,
+  void signInWithEmail({@required String email, @required String password,
     @required VoidCallback onSuccess, @required VoidCallback onFail}) async {
-      isLoading =true;
-      notifyListeners();
+      isLoadingTrue();
 
-      _auth.signInWithEmailAndPassword(email: email, password: password).then(
-        (user) async{
-          firebaseUser = user;
+      try{
+        firebaseUser = (await _auth.signInWithEmailAndPassword(
+            email: email, password: password)).user;
 
-          await _loadCurrentUser();
+        await _loadCurrentUser();
 
-          onSuccess();
-          isLoading = false;
-          notifyListeners();
+        onSuccess();
+        isLoadingFalse();
+      } catch (error){
+        onFail();
+        isLoadingFalse();
+      }
+  }
 
-        }).catchError((e){
-          onFail();
-          isLoading = false;
-          notifyListeners();
-        });
+  void signInWithGoogle({@required VoidCallback onSuccess, @required VoidCallback onFail}) async {
+    isLoadingTrue();
+
+    try{
+      final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
+      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
+      final AuthCredential credential = GoogleAuthProvider.getCredential(
+        idToken: googleAuth.idToken,
+        accessToken: googleAuth.accessToken
+      );
+
+      final FirebaseUser user = (await _auth.signInWithCredential(credential)).user;
+
+      // apenas na primeira vez
+      Map<String, dynamic> userData = {
+        "email": user.email,
+        "name": user.displayName,
+        "photoUrl": user.photoUrl,
+      };
+      _saveUserData(userData);
+
+      await _loadCurrentUser();
+
+      onSuccess();
+      isLoadingFalse();
+
+    } catch (error){
+      onFail();
+      isLoadingFalse();
+    }
   }
 
   void signOut() async {

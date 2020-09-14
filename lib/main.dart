@@ -3,8 +3,6 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:sos_deslizamentos_app/models/user_model.dart';
 import 'package:sos_deslizamentos_app/screens/homeLogin_screen.dart';
 
-
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
