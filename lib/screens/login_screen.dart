@@ -9,6 +9,7 @@ import 'package:sos_deslizamentos_app/screens/success_screen.dart';
 import 'package:sos_deslizamentos_app/widgets/custom_textFormField.dart';
 import 'package:sos_deslizamentos_app/widgets/icon_round_button.dart';
 import 'package:sos_deslizamentos_app/widgets/round_button.dart';
+import 'package:sos_deslizamentos_app/widgets/title_formField.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -53,36 +54,46 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Form(
               key: _formKey,
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   child: Column(
                     children: <Widget>[
 
-                      CustomTextFormField(
-                        title: "E-mail",
-                        controller: _emailController,
-                        obscureText: false,
-                        hintText: "seuemail@endereço",
-                          prefixIcon: Icon(Icons.email),
-                        suffixIcon: null,
-                        inputType: TextInputType.emailAddress,
-                        validator: RequiredValidator(errorText: "O e-mail é obrigatório!")
+                      Column(
+                        children: <Widget>[
+                          TitleFormField(title: "E-mail"),
+                          CustomTextFormField(
+                            inputFormatter: null,
+                            controller: _emailController,
+                            obscureText: false,
+                            hintText: "seuemail@endereço",
+                            prefixIcon: Icon(Icons.email),
+                            suffixIcon: null,
+                            inputType: TextInputType.emailAddress,
+                            validator: RequiredValidator(errorText: "O e-mail é obrigatório!")
+                          ),
+                        ],
                       ),
                       Divider(height: 16.0),
 
-                      CustomTextFormField(
-                        title: "Senha",
-                        controller: _passwordController,
-                        obscureText: _isObscure,
-                        hintText: "********",
-                        prefixIcon: Icon(Icons.vpn_key),
-                        suffixIcon: IconButton(
-                          onPressed: _toggleVisibility,
-                          icon: _isObscure ? Icon(Icons.visibility_off) : Icon(Icons.visibility),
-                        ),
-                        inputType: null,
-                        validator: RequiredValidator(errorText: "A senha é obrigatória!")
+                      Column(
+                        children: <Widget>[
+                          TitleFormField(title: "Senha"),
+                          CustomTextFormField(
+                            inputFormatter: null,
+                            controller: _passwordController,
+                            obscureText: _isObscure,
+                            hintText: "********",
+                            prefixIcon: Icon(Icons.vpn_key),
+                            suffixIcon: IconButton(
+                              onPressed: _toggleVisibility,
+                              icon: _isObscure ? Icon(Icons.visibility_off) : Icon(Icons.visibility),
+                            ),
+                            inputType: null,
+                            validator: RequiredValidator(errorText: "A senha é obrigatória!")
+                          ),
+                        ],
                       ),
                       Divider(height: 16.0),
 
@@ -151,68 +162,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           }
                         ),
                       ),
-
-                      Container(
-                        margin: EdgeInsets.only(top: 20.0),
-                        child: Row(
-                          children: <Widget>[
-                            Expanded(
-                              child: Container(
-                                margin: EdgeInsets.all(8.0),
-                                decoration: BoxDecoration(
-                                  border: Border.all(width: 0.25)
-                                ),
-                              ),
-                            ),
-                            Text(
-                              "Ou conecte com".toUpperCase(),
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold
-                              ),
-                            ),
-                            Expanded(
-                              child: Container(
-                                margin: EdgeInsets.all(8.0),
-                                decoration: BoxDecoration(
-                                  border: Border.all(width: 0.25)
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-
-                      Container( // login with facebook/google buttons
-                        margin: EdgeInsets.only(top: 20.0),
-                        child: Row(
-                          children: <Widget>[
-                            IconRoundButton( // Facebook button
-                              buttonText: "Facebook",
-                              backgroundColor: Color.fromARGB(255, 59, 89, 152),
-                              buttonTextColor: Colors.white,
-                              iconColor: Colors.white,
-                              icon: null,
-                              functionOnPressed: ()=>null
-                            ),
-                            SizedBox(width: 8.0),
-                            IconRoundButton( // Google button
-                              buttonText: "Google",
-                              backgroundColor: Color.fromARGB(255, 219, 74, 57),
-                              buttonTextColor: Colors.white,
-                              iconColor: Colors.white,
-                              icon: null,
-                              functionOnPressed: (){
-                                model.signInWithGoogle(
-                                  onSuccess: _onSuccess,
-                                  onFail: _onFail
-                                );
-                              }
-                            ),
-                          ],
-                        ),
-                      )
-
                     ],
                   ),
                 )

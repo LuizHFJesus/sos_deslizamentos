@@ -35,17 +35,17 @@ class IconRoundButton extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-//              FaIcon(
-//                FontAwesomeIcons.facebook,
-//                color: Colors.white,
-//                size: 15.0,
-//              ),
+              // FaIcon(
+              //   icon,
+              //   color: Colors.white,
+              //   size: 15.0,
+              // ),
               Text(
                 buttonText.toUpperCase(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    color: buttonTextColor,
-                    fontWeight: FontWeight.bold
+                  color: buttonTextColor,
+                  fontWeight: FontWeight.bold
                 ),
               )
             ],
