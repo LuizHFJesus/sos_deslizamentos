@@ -9,6 +9,8 @@ class UserModel extends Model{
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   FirebaseUser firebaseUser;
+  String errorText = "";
+
   Map<String, dynamic> userData = Map();
 
   bool isLoading = false;
@@ -45,6 +47,8 @@ class UserModel extends Model{
       onSuccess();
       isLoadingFalse();
     } catch (error) {
+
+
       print("Teste Erro: $error");
       onFail();
       isLoadingFalse();
@@ -64,6 +68,7 @@ class UserModel extends Model{
         onSuccess();
         isLoadingFalse();
       } catch (error){
+        print("Teste Erro: $error");
         onFail();
         isLoadingFalse();
       }
@@ -83,13 +88,15 @@ class UserModel extends Model{
 
       final FirebaseUser user = (await _auth.signInWithCredential(credential)).user;
 
-      // apenas na primeira vez
-      Map<String, dynamic> userData = {
-        "email": user.email,
-        "name": user.displayName,
-        "photoUrl": user.photoUrl,
-      };
-      _saveUserData(userData);
+      //if(googleAuth.accessToken != ){
+        Map<String, dynamic> userData = {
+          "email": user.email,
+          "name": user.displayName,
+          "photoUrl": user.photoUrl,
+        };
+        _saveUserData(userData);
+     // }
+
 
       await _loadCurrentUser();
 
@@ -97,6 +104,7 @@ class UserModel extends Model{
       isLoadingFalse();
 
     } catch (error){
+      print("Teste Erro: $error");
       onFail();
       isLoadingFalse();
     }

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:sos_deslizamentos_app/models/user_model.dart';
 import 'package:sos_deslizamentos_app/widgets/custom_textFormField.dart';
 import 'package:sos_deslizamentos_app/widgets/round_button.dart';
+import 'package:sos_deslizamentos_app/widgets/title_formField.dart';
+import 'package:brasil_fields/brasil_fields.dart';
 
 
 class FormAddressScreen extends StatefulWidget {
@@ -18,6 +21,7 @@ class _FormAddressScreen extends State<FormAddressScreen> {
   final _bairroController = TextEditingController();
   final _cityController = TextEditingController();
   final _stateController = TextEditingController();
+  String dropdownValue;
 
   final _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -40,81 +44,117 @@ class _FormAddressScreen extends State<FormAddressScreen> {
             child: Form(
               key: _formKey,
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   child: Column(
                     children: <Widget>[
 
-                      Container(
-                        padding: EdgeInsets.only(top: 20.0),
-                        child: Text(
-                          "Cadatre seu endereço",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24.0,
-                            fontWeight: FontWeight.w300
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: <Widget>[
+                          Expanded(
+                            child: Column(
+                              children: <Widget>[
+                                TitleFormField(title: "CEP"),
+                                CustomTextFormField(
+                                  inputFormatter: CepInputFormatter(),
+                                  controller: _cepController,
+                                  obscureText: false,
+                                  hintText: "00.000-000",
+                                  prefixIcon: null,
+                                  suffixIcon: null,
+                                  inputType: TextInputType.number,
+                                  validator: null
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ),
 
-                      CustomTextFormField(
-                        title: "CEP",
-                        controller: _cepController,
-                        obscureText: false,
-                        hintText: "00000-000",
-                        prefixIcon: null,
-                        suffixIcon: null,
-                        inputType: TextInputType.text,
-                        validator: RequiredValidator(errorText: " !")
-                      ),
-                      Divider(height: 16.0),
+                          SizedBox(width: 16.0, ),
 
-                      CustomTextFormField(
-                        title: "Estado",
-                        controller: _stateController,
-                        obscureText: false,
-                        hintText: " ",
-                        prefixIcon: null,
-                        suffixIcon: null,
-                        inputType: TextInputType.text,
-                        validator: RequiredValidator(errorText: " !")
-                      ),
-                      Divider(height: 16.0,),
-
-                      CustomTextFormField(
-                        title: "Cidade",
-                        controller: _cityController,
-                        obscureText: false,
-                        hintText: " ",
-                        prefixIcon: null,
-                        suffixIcon: null,
-                        inputType: TextInputType.text,
-                        validator: RequiredValidator(errorText: " !")
-                      ),
-                      Divider(height: 16.0,),
-
-                      CustomTextFormField(
-                        title: "Bairro",
-                        controller: _bairroController,
-                        obscureText: false,
-                        hintText: "Bairro",
-                        prefixIcon: null,
-                        suffixIcon: null,
-                        inputType: TextInputType.text,
-                        validator: RequiredValidator(errorText: " ")
+                          Expanded(
+                            child: Column(
+                              children: <Widget>[
+                                TitleFormField(title: "Estado"),
+                                Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: DropdownButton(
+                                    value: dropdownValue,
+                                    isExpanded: true,
+                                    underline: Container(
+                                      height: 1,
+                                      padding: EdgeInsets.only(top: 30.0, bottom: 0.0),
+                                      color: Colors.grey,
+                                    ),
+                                    onChanged: (String newValue) {
+                                      setState(() {
+                                        dropdownValue = newValue;
+                                      });
+                                    },
+                                    items: Estados.listaEstados.map((String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Text(value),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ) ,
+                        ],
                       ),
                       Divider(height: 16.0),
 
-                      CustomTextFormField(
-                        title: "Logradouro",
-                        controller: _logradouroController,
-                        obscureText: false,
-                        hintText: "Nome da rua",
-                        prefixIcon: null,
-                        suffixIcon: null,
-                        inputType: TextInputType.text,
-                        validator: RequiredValidator(errorText: " ")
+                      Column(
+                        children: <Widget>[
+                          TitleFormField(title: "Cidade"),
+                          CustomTextFormField(
+                            inputFormatter: null,
+                            controller: _cityController,
+                            obscureText: false,
+                            hintText: "Cidade",
+                            prefixIcon: null,
+                            suffixIcon: null,
+                            inputType: TextInputType.text,
+                            validator: RequiredValidator(errorText: " !")
+                          ),
+                        ],
+                      ),
+                      Divider(height: 16.0,),
+
+                      Column(
+                        children: <Widget>[
+                          TitleFormField(title: "Bairro"),
+                          CustomTextFormField(
+                            inputFormatter: null,
+                            controller: _bairroController,
+                            obscureText: false,
+                            hintText: "Bairro",
+                            prefixIcon: null,
+                            suffixIcon: null,
+                            inputType: TextInputType.text,
+                            validator: RequiredValidator(errorText: " ")
+                          ),
+                        ],
+                      ),
+                      Divider(height: 16.0),
+
+                      Column(
+                        children: <Widget>[
+                          TitleFormField(title: "Logradouro"),
+                          CustomTextFormField(
+                            inputFormatter: null,
+                            controller: _logradouroController,
+                            obscureText: false,
+                            hintText: "Nome da rua",
+                            prefixIcon: null,
+                            suffixIcon: null,
+                            inputType: TextInputType.text,
+                            validator: RequiredValidator(errorText: " ")
+                          ),
+                        ],
                       ),
                       Divider(height: 16.0),
 

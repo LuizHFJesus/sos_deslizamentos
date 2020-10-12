@@ -8,6 +8,7 @@ import 'package:sos_deslizamentos_app/screens/success_screen.dart';
 import 'package:sos_deslizamentos_app/widgets/custom_textFormField.dart';
 import 'package:sos_deslizamentos_app/widgets/icon_round_button.dart';
 import 'package:sos_deslizamentos_app/widgets/round_button.dart';
+import 'package:sos_deslizamentos_app/widgets/title_formField.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -52,48 +53,62 @@ class _SignUpScreen extends State<SignUpScreen> {
             child: Form(
               key: _formKey,
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   child: Column(
                     children: <Widget>[
-
-                      CustomTextFormField(
-                        title: "Nome Completo",
-                        controller: _nameController,
-                        obscureText: false,
-                        hintText: "José Antônio da Silva",
-                        prefixIcon: Icon(Icons.person),
-                        suffixIcon: null,
-                        inputType: TextInputType.text,
-                        validator: RequiredValidator(errorText: "O nome é obrigatório!")
+                      Column(
+                        children: <Widget>[
+                          TitleFormField(title: "Nome Completo"),
+                          CustomTextFormField(
+                            inputFormatter: null,
+                            controller: _nameController,
+                            obscureText: false,
+                            hintText: "José Antônio da Silva",
+                            prefixIcon: Icon(Icons.person),
+                            suffixIcon: null,
+                            inputType: TextInputType.text,
+                            validator: RequiredValidator(errorText: "O nome é obrigatório!")
+                          ),
+                        ],
                       ),
                       Divider(height: 16.0),
 
-                      CustomTextFormField(
-                        title: "E-mail",
-                        controller: _emailController,
-                        obscureText: false,
-                        hintText: "seuemail@endereço",
-                        prefixIcon: Icon(Icons.email),
-                        suffixIcon: null,
-                        inputType: TextInputType.emailAddress,
-                        validator: emailValidator
+                      Column(
+                        children: <Widget>[
+                          TitleFormField(title: "E-mail"),
+                          CustomTextFormField(
+                            inputFormatter: null,
+                            controller: _emailController,
+                            obscureText: false,
+                            hintText: "seuemail@endereço",
+                            prefixIcon: Icon(Icons.email),
+                            suffixIcon: null,
+                            inputType: TextInputType.emailAddress,
+                            validator: emailValidator
+                          ),
+                        ],
                       ),
                       Divider(height: 16.0),
 
-                      CustomTextFormField(
-                        title: "Senha",
-                        controller: _passwordController,
-                        obscureText: _isObscure,
-                        hintText: "*********",
-                        prefixIcon: Icon(Icons.vpn_key),
-                        suffixIcon: IconButton(
-                          onPressed: _toggleVisibility,
-                          icon: _isObscure ? Icon(Icons.visibility_off) : Icon(Icons.visibility),
-                        ),
-                        inputType: TextInputType.text,
-                        validator: passwordValidator
+                      Column(
+                        children: <Widget>[
+                          TitleFormField(title: "Senha"),
+                          CustomTextFormField(
+                            inputFormatter: null,
+                            controller: _passwordController,
+                            obscureText: _isObscure,
+                            hintText: "*********",
+                            prefixIcon: Icon(Icons.vpn_key),
+                            suffixIcon: IconButton(
+                              onPressed: _toggleVisibility,
+                              icon: _isObscure ? Icon(Icons.visibility_off) : Icon(Icons.visibility),
+                            ),
+                            inputType: TextInputType.text,
+                            validator: passwordValidator
+                          ),
+                        ],
                       ),
                       Divider(height: 16.0,),
 
@@ -123,63 +138,6 @@ class _SignUpScreen extends State<SignUpScreen> {
                           }
                         ),
                       ),
-
-                      Container(
-                        margin: EdgeInsets.only(top: 20.0),
-                        child: Row(
-                          children: <Widget>[
-                            Expanded(
-                              child: Container(
-                                margin: EdgeInsets.all(8.0),
-                                decoration: BoxDecoration(
-                                    border: Border.all(width: 0.25)
-                                ),
-                              ),
-                            ),
-                            Text(
-                              "Ou cadastre-se com".toUpperCase(),
-                              style: TextStyle(
-                                  color: Colors.grey,
-                                  fontWeight: FontWeight.bold
-                              ),
-                            ),
-                            Expanded(
-                              child: Container(
-                                margin: EdgeInsets.all(8.0),
-                                decoration: BoxDecoration(
-                                    border: Border.all(width: 0.25)
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-
-                      Container( // login with facebook/google buttons
-                        margin: EdgeInsets.only(top: 20.0),
-                        child: Row(
-                          children: <Widget>[
-                            IconRoundButton( // Facebook button
-                                buttonText: "Facebook",
-                                backgroundColor: Color.fromARGB(255, 59, 89, 152),
-                                buttonTextColor: Colors.white,
-                                iconColor: Colors.white,
-                                icon: null,
-                                functionOnPressed: ()=>null
-                            ),
-                            SizedBox(width: 8.0),
-                            IconRoundButton( // Google button
-                                buttonText: "Google",
-                                backgroundColor: Color.fromARGB(255, 219, 74, 57),
-                                buttonTextColor: Colors.white,
-                                iconColor: Colors.white,
-                                icon: null,
-                                functionOnPressed: ()=>null
-                            ),
-                          ],
-                        ),
-                      )
-
                     ]
                   ),
                 ),
@@ -209,7 +167,7 @@ class _SignUpScreen extends State<SignUpScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => FormAddressScreen()
+        builder: (context) => SuccessScreen(text: "Conta criada com sucesso!")
       )
     );
   }

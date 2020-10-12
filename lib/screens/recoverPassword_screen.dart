@@ -5,6 +5,7 @@ import 'package:sos_deslizamentos_app/models/user_model.dart';
 import 'package:sos_deslizamentos_app/screens/success_screen.dart';
 import 'package:sos_deslizamentos_app/widgets/custom_textFormField.dart';
 import 'package:sos_deslizamentos_app/widgets/round_button.dart';
+import 'package:sos_deslizamentos_app/widgets/title_formField.dart';
 
 class RecoverPasswordScreen extends StatefulWidget {
   @override
@@ -33,7 +34,7 @@ class _RecoverPasswordScreenState extends State<RecoverPasswordScreen> {
 
           return SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+              padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 child: Form(
@@ -54,17 +55,23 @@ class _RecoverPasswordScreenState extends State<RecoverPasswordScreen> {
                       ),
                       SizedBox(height: 40.0),
 
-                      CustomTextFormField(
-                        title: "E-mail",
-                        controller: _emailController,
-                        obscureText: false,
-                        hintText: "seuemail@endereço",
-                        prefixIcon: Icon(Icons.email),
-                        suffixIcon: null,
-                        inputType: TextInputType.emailAddress,
-                        validator: RequiredValidator(errorText: "O e-mail é obrigatório!")
+                      Column(
+                        children: <Widget>[
+                          TitleFormField(title: "E-mail"),
+                          CustomTextFormField(
+                            inputFormatter: null,
+                            controller: _emailController,
+                            obscureText: false,
+                            hintText: "seuemail@endereço",
+                            prefixIcon: Icon(Icons.email),
+                            suffixIcon: null,
+                            inputType: TextInputType.emailAddress,
+                            validator: RequiredValidator(errorText: "O e-mail é obrigatório!")
+                          ),
+                        ],
                       ),
                       SizedBox(height: 40.0),
+
                       RoundButton(
                         buttonText: "Continuar",
                         backgroundColor: Theme.of(context).primaryColor,
