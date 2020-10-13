@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sos_deslizamentos_app/widgets/functionality-card.dart';
+import 'package:sos_deslizamentos_app/widgets/functionality_card.dart';
 
 class HomeScreen extends StatefulWidget {
   @override

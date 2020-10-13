@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class FunctionalityCard extends StatelessWidget {
@@ -17,11 +18,12 @@ class FunctionalityCard extends StatelessWidget {
     return Container(
         margin: EdgeInsets.fromLTRB(20.0, 12.0, 20.0, 8.0),
         child: Row(
-          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             icon,
             SizedBox(width: 12.0,),
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
                   title,
