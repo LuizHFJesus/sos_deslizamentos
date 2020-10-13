@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:sos_deslizamentos_app/screens/home_screen.dart';
 
 class NavigationScreen extends StatefulWidget {
   @override
@@ -40,7 +41,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
   }
 
   List<Widget> _screens = [
-    Container(decoration: BoxDecoration(color: Colors.yellow),),
+    HomeScreen(),
     Container(decoration: BoxDecoration(color: Colors.greenAccent),),
     Container(decoration: BoxDecoration(color: Colors.blue),),
     Container(decoration: BoxDecoration(color: Colors.redAccent),),
