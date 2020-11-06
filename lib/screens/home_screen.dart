@@ -127,13 +127,13 @@ class _HomeScreenState extends State<HomeScreen> {
             FunctionalityCard(
               icon: Icon(Icons.report_problem, size: 35.0,),
               title: "Reportar problemas",
-              description: "Reporte algum problema ne sua região.",
+              description: "Reporte algum problema em sua região.",
             ),
             Padding(padding: EdgeInsets.only(left: 67.0), child: Divider(),),
             FunctionalityCard(
               icon: Icon(Icons.person, size: 35.0,),
               title: "Perfil",
-              description: "Acesse os seus dados ou realize ualterações.",
+              description: "Acesse os seus dados ou realize alterações.",
             ),
             SizedBox(height: 8.0,),
 
