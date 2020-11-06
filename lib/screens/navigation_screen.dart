@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:sos_deslizamentos_app/screens/ambientEducation_screen.dart';
 import 'package:sos_deslizamentos_app/screens/home_screen.dart';
 
 class NavigationScreen extends StatefulWidget {
@@ -42,7 +43,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
 
   List<Widget> _screens = [
     HomeScreen(),
-    Container(decoration: BoxDecoration(color: Colors.greenAccent),),
+    AmbientEducationScreen(),
     Container(decoration: BoxDecoration(color: Colors.blue),),
     Container(decoration: BoxDecoration(color: Colors.redAccent),),
   ];
