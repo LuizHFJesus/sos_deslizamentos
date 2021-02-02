@@ -56,6 +56,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
         elevation: 0.0,
         centerTitle: true,
         title: Text(titleAppBar(_currentIndex)),
+        automaticallyImplyLeading: false,
       ),
 
       body: PageView(
@@ -71,19 +72,19 @@ class _NavigationScreenState extends State<NavigationScreen> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            title: Text("Principal"),
+            label: "Principal",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.book),
-            title: Text("Educação"),
+            label: "Educação",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.report_problem),
-            title: Text("Reportar"),
+            label: "Reportar",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            title: Text("Perfil"),
+            label: "Perfil",
           ),
         ],
         onTap: _onTappedItem

@@ -11,6 +11,8 @@ import 'package:sos_deslizamentos_app/widgets/icon_round_button.dart';
 import 'package:sos_deslizamentos_app/widgets/round_button.dart';
 import 'package:sos_deslizamentos_app/widgets/title_formField.dart';
 
+import 'navigation_screen.dart';
+
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -174,11 +176,18 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _onSuccess(){
-    Navigator.push(
+    // Navigator.push(
+    //     context,
+    //     MaterialPageRoute(
+    //       builder: (context) => SuccessScreen(text: "Login efetuado com sucesso!",)
+    //     )
+    // );
+    Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
-          builder: (context) => SuccessScreen(text: "Login efetuado com sucesso!",)
-        )
+            builder: (context) => NavigationScreen()
+        ),
+        (Route<dynamic> route) => route is LoginScreen
     );
   }
 

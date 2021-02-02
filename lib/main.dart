@@ -20,7 +20,8 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
             primaryColor: Colors.lightBlue[500],
           ),
-          home: NavigationScreen(),
+          home: HomeLoginScreen()
+          // model.isLoggedIn() ? NavigationScreen() : HomeLoginScreen()
         )
     );
   }

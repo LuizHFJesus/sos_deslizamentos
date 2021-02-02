@@ -179,6 +179,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               child: FlatButton(
                 onPressed: (){},
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.0)
+                ),
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20.0),
                   child: Column(
