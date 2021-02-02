@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:sos_deslizamentos_app/models/user_model.dart';
+import 'package:sos_deslizamentos_app/screens/home_screen.dart';
 import 'package:sos_deslizamentos_app/screens/login_screen.dart';
+import 'package:sos_deslizamentos_app/screens/navigation_screen.dart';
 import 'package:sos_deslizamentos_app/screens/signup_screen.dart';
 import 'package:sos_deslizamentos_app/screens/success_screen.dart';
 import 'package:sos_deslizamentos_app/widgets/icon_round_button.dart';
@@ -20,12 +22,12 @@ class _HomeLoginScreenState extends State<HomeLoginScreen> {
   Widget _buildBody() => Container(
     decoration: BoxDecoration(
         gradient: LinearGradient(
-            colors: [
-              Colors.lightBlue[500],
-              Colors.lightBlue[200],
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Colors.lightBlue[500],
+            Colors.lightBlue[200],
+          ],
         )
     ),
   );
@@ -154,15 +156,15 @@ class _HomeLoginScreenState extends State<HomeLoginScreen> {
                           margin: EdgeInsets.only(top: 20.0),
                           child: Row(
                             children: <Widget>[
-                              IconRoundButton( // Facebook button
-                                  buttonText: "Facebook",
-                                  backgroundColor: Color.fromARGB(255, 59, 89, 152),
-                                  buttonTextColor: Colors.white,
-                                  iconColor: Colors.white,
-                                  icon: null,
-                                  functionOnPressed: ()=>null
-                              ),
-                              SizedBox(width: 8.0),
+                              // IconRoundButton( // Facebook button
+                              //     buttonText: "Facebook",
+                              //     backgroundColor: Color.fromARGB(255, 59, 89, 152),
+                              //     buttonTextColor: Colors.white,
+                              //     iconColor: Colors.white,
+                              //     icon: null,
+                              //     functionOnPressed: ()=>null
+                              // ),
+                              // SizedBox(width: 8.0),
                               IconRoundButton( // Google button
                                   buttonText: "Google",
                                   backgroundColor: Color.fromARGB(255, 219, 74, 57),
@@ -172,11 +174,19 @@ class _HomeLoginScreenState extends State<HomeLoginScreen> {
                                   functionOnPressed: (){
                                     model.signInWithGoogle(
                                         onSuccess: (){
-                                          Navigator.push(
-                                              context,
+                                          // Navigator.push(
+                                          //     context,
+                                          //     MaterialPageRoute(
+                                          //       // builder: (context) => SuccessScreen(text: "Login efetuado com sucesso!",)
+                                          //       builder: (context) => NavigationScreen()
+                                          //     )
+                                          // );
+                                          Navigator.pushAndRemoveUntil(
+                                            context,
                                               MaterialPageRoute(
-                                                  builder: (context) => SuccessScreen(text: "Login efetuado com sucesso!",)
-                                              )
+                                                  builder: (context) => NavigationScreen()
+                                              ),
+                                              (Route<dynamic> route) => route is HomeLoginScreen
                                           );
                                         },
                                         onFail: (){

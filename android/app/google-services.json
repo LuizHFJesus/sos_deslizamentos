@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "919822744673-hjqkca97e7a7tooqgdipanetrkel908a.apps.googleusercontent.com",
+          "client_id": "919822744673-j8t7klurr7s8leah6ca2fklmmeo3jasv.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "br.com.sos_deslizamentos_app",
-            "certificate_hash": "55a0dcff2a5db57a66fc328247ad93aef08478cd"
+            "certificate_hash": "255d4e1c74efd66ce13337aee7f053ec396bef98"
           }
         },
         {

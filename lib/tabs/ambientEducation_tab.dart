@@ -26,7 +26,7 @@ class AmbientEducationTab extends StatelessWidget {
               Container(
                 child: Image.network(
                   data.image,
-                  height: 100.0,
+                  height: 90.0,
                 ),
               ),
               SizedBox(height: 16.0),
