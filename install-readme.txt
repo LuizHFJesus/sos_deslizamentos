@@ -44,4 +44,3 @@ selecionar a pasta do projeto baixada no GitHub.
 
 
 Qualquer dúvida ou problema na execução do aplicativo é só entrar em contato com o Luiz (WhatsApp: 19998213281).
-
