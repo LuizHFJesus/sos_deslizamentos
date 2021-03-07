@@ -12,17 +12,23 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScopedModel<UserModel>(
-        model: UserModel(),
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'SOS Deslizamentos',
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-            primaryColor: Colors.lightBlue[500],
-          ),
-          home: HomeLoginScreen()
-          // model.isLoggedIn() ? NavigationScreen() : HomeLoginScreen()
-        )
+      model: UserModel(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'SOS Deslizamentos',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          primaryColor: Colors.lightBlue[500],
+        ),
+        home: ((){
+          return ScopedModelDescendant<UserModel>(builder: (context, child, model){
+            if (model.isLoading) return Center(child: CircularProgressIndicator(),);
+            else if (model.user == null) return HomeLoginScreen();
+            else return NavigationScreen();
+          });
+        }())
+      )
     );
   }
 }
+
