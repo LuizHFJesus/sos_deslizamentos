@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +11,7 @@ class UserModel extends Model{
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
-  FirebaseUser firebaseUser;
+  FirebaseUser user;
   String errorText = "";
 
   Map<String, dynamic> userData = Map();
@@ -39,7 +42,7 @@ class UserModel extends Model{
     isLoadingTrue();
 
     try{
-      firebaseUser = (await _auth.createUserWithEmailAndPassword(
+      user = (await _auth.createUserWithEmailAndPassword(
           email: userData['email'], password: password)).user;
 
       await _saveUserData(userData);
@@ -60,7 +63,7 @@ class UserModel extends Model{
       isLoadingTrue();
 
       try{
-        firebaseUser = (await _auth.signInWithEmailAndPassword(
+        user = (await _auth.signInWithEmailAndPassword(
             email: email, password: password)).user;
 
         await _loadCurrentUser();
@@ -86,7 +89,8 @@ class UserModel extends Model{
         accessToken: googleAuth.accessToken
       );
 
-      final FirebaseUser user = (await _auth.signInWithCredential(credential)).user;
+      final FirebaseUser user =
+          (await _auth.signInWithCredential(credential)).user;
 
       //if(googleAuth.accessToken != ){
         Map<String, dynamic> userData = {
@@ -114,7 +118,7 @@ class UserModel extends Model{
     await _auth.signOut();
 
     userData = Map();
-    firebaseUser = null;
+    user = null;
 
     notifyListeners();
   }
@@ -124,25 +128,56 @@ class UserModel extends Model{
   }
 
   bool isLoggedIn(){
-    return firebaseUser != null;
+    return user != null;
   }
 
   Future<Null> _saveUserData(Map<String, dynamic> userData) async{
     this.userData = userData;
-    await Firestore.instance.collection("users").document(firebaseUser.uid)
+    await Firestore.instance.collection("users").document(user.uid)
         .setData(userData);
   }
 
   Future<Null> _loadCurrentUser() async{
-    if(firebaseUser == null)
-      firebaseUser = await _auth.currentUser();
-    if(firebaseUser != null){
+    if(user == null)
+      user = await _auth.currentUser();
+    if(user != null){
       if(userData["name"] == null){
         DocumentSnapshot docUser =
-          await Firestore.instance.collection("users").document(firebaseUser.uid).get();
+          await Firestore.instance.collection("users").document(user.uid).get();
         userData = docUser.data;
       }
     }
+    notifyListeners();
+  }
+  Future<Null> sendMessage({String text, File imgFile}) async {
+    Map<String, dynamic> data ={
+      'uid': user.uid,
+      'senderName': user.displayName,
+      "senderPhotoUrl": user.photoUrl,
+      "time": Timestamp.now(),
+    };
+
+    if(imgFile != null) {
+      StorageUploadTask task = FirebaseStorage.instance.ref().child(
+          user.uid + DateTime
+              .now()
+              .millisecondsSinceEpoch
+              .toString()
+      ).putFile(imgFile);
+
+      isLoadingTrue();
+
+      StorageTaskSnapshot taskSnapshot = await task.onComplete;
+      String url = await taskSnapshot.ref.getDownloadURL();
+      data['imgUrl'] = url;
+
+      isLoadingFalse();
+    }
+
+    if(text != null) data['text'] = text;
+
+    Firestore.instance.collection('messages').add(data);
+
     notifyListeners();
   }
 }

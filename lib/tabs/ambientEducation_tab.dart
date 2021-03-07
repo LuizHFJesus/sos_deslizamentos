@@ -13,7 +13,6 @@ class AmbientEducationTab extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        toolbarOpacity: 0.5,
         elevation: 0.0,
       ),
       body: SingleChildScrollView(

@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:sos_deslizamentos_app/screens/ambientEducation_screen.dart';
+import 'package:sos_deslizamentos_app/screens/chat_screen.dart';
 import 'package:sos_deslizamentos_app/screens/home_screen.dart';
 
 class NavigationScreen extends StatefulWidget {
@@ -57,6 +58,17 @@ class _NavigationScreenState extends State<NavigationScreen> {
         centerTitle: true,
         title: Text(titleAppBar(_currentIndex)),
         automaticallyImplyLeading: false,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.chat_outlined),
+            onPressed: (){
+              Navigator.of(context).push(
+                  MaterialPageRoute(
+                      builder: (context)=>ChatScreen()
+                  )
+              );
+            })
+        ],
       ),
 
       body: PageView(

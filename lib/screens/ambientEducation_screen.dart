@@ -10,7 +10,6 @@ class AmbientEducationScreen extends StatefulWidget {
 }
 
 class _AmbientEducationScreenState extends State<AmbientEducationScreen> {
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<QuerySnapshot>(
