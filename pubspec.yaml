@@ -1,0 +1,121 @@
+name: sos_deslizamentos
+description: A new Flutter application.
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cloud_firestore: ^2.2.0
+  image_picker: ^0.8.0
+  firebase_auth: ^1.2.0
+  firebase_core: ^1.2.0
+  firebase_storage: ^8.1.0
+  flutter_svg: ^0.21.0+1
+  google_sign_in: ^5.0.4
+  flutter_launcher_icons: ^0.9.0
+  shared_preferences: ^2.0.6
+
+flutter_icons:
+  image_path: "assets/images/logo.png"
+  android: true
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+
+  fonts:
+    - family: Black
+      fonts:
+        - asset: fonts/Poppins-Black.ttf
+
+    - family: BlackItalic
+      fonts:
+        - asset: fonts/Poppins-BlackItalic.ttf
+
+    - family: Bold
+      fonts:
+        - asset: fonts/Poppins-Bold.ttf
+
+    - family: BoldItalic
+      fonts:
+        - asset: fonts/Poppins-BoldItalic.ttf
+
+    - family: ExtraBold
+      fonts:
+        - asset: fonts/Poppins-ExtraBold.ttf
+
+    - family: ExtraBoldItalic
+      fonts:
+        - asset: fonts/Poppins-ExtraBoldItalic.ttf
+
+    - family: ExtraLight
+      fonts:
+        - asset: fonts/Poppins-ExtraLight.ttf
+
+    - family: ExtraLightItalic
+      fonts:
+        - asset: fonts/Poppins-ExtraLightItalic.ttf
+
+    - family: Italic
+      fonts:
+        - asset: fonts/Poppins-Italic.ttf
+
+    - family: Light
+      fonts:
+        - asset: fonts/Poppins-Light.ttf
+
+    - family: LightItalic
+      fonts:
+        - asset: fonts/Poppins-LightItalic.ttf
+
+    - family: Medium
+      fonts:
+        - asset: fonts/Poppins-Medium.ttf
+
+    - family: MediumItalic
+      fonts:
+        - asset: fonts/Poppins-MediumItalic.ttf
+
+    - family: Regular
+      fonts:
+        - asset: fonts/Poppins-Regular.ttf
+
+    - family: SemiBold
+      fonts:
+        - asset: fonts/Poppins-SemiBold.ttf
+
+    - family: SemiBoldItalic
+      fonts:
+        - asset: fonts/Poppins-SemiBoldItalic.ttf
+
+    - family: Thin
+      fonts:
+        - asset: fonts/Poppins-Thin.ttf
+
+    - family: ThinItalic
+      fonts:
+        - asset: fonts/Poppins-ThinItalic.ttf
