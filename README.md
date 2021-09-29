@@ -13,18 +13,23 @@ localizada em áreas com maior vulnerabilidade socioambiental.
 
 ## Sobre o aplicativo
 
-**🛠️ Ferramentas e softwares utilizados para o desenvolvimento do app**
+**🛠️ Ferramentas e softwares que auxiliaram no desenvolvimento do app**
 <div> 
-  <a href="#">
-  <img align="center" src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white">
-  <img align="center" src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white">
-  <img align="center" src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white">
-  <img align="center" src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white" alt="Figma">
-  <img align="center" src="https://img.shields.io/badge/firebase-ffca28?style=for-the-badge&logo=firebase&logoColor=black" alt="Firebase">
-  <img align="center" src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white">
+  <a href="https://flutter.dev/">
+    <img align="center" src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white"> </a>
+  <a href="https://dart.dev/">
+    <img align="center" src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white"> </a>
+  <a href="https://developer.android.com/">
+   <img align="center" src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white"> </a>
+  <a href="https://www.figma.com/file/9g1wxMnJi6hzMpp99L3rJD/SOSDeslizamentos?node-id=0%3A1">
+   <img align="center" src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white" alt="Figma"> </a>
+  <a href="https://firebase.google.com/">
+    <img align="center" src="https://img.shields.io/badge/firebase-ffca28?style=for-the-badge&logo=firebase&logoColor=black" alt="Firebase"> </a>
+  <a href="https://github.com/LuizHFJesus/sos_deslizamentos"> 
+    <img align="center" src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"> </a>
 </div>
 
-#
+# 
 
 <!--
 This project is a starting point for a Flutter application.
